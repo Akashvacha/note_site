@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="app-container">
+    <header>
+      <h1>📝 My Notes</h1>
+      <div class="controls">
+        <button id="darkModeToggle" type="button" aria-pressed="false">🌙 Mode</button>
+        <input type="text" id="searchInput" placeholder="Search notes...">
+      </div>
+    </header>
+
+    <main>
+      <div class="note-input">
+        <input type="text" id="noteTitle" placeholder="Note Title">
+        <textarea id="noteContent" placeholder="Write your note..."></textarea>
+        <label><input type="checkbox" id="isChecklist"> Checklist Note</label>
+        <button id="addNoteBtn" type="button">Add Note</button>
+      </div>
+
+      <div id="notesContainer" class="notes-container"></div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

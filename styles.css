@@ -1,0 +1,316 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Light mode */
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #d7e3fc, #c3bef0);
+  min-height: 105vh;
+  display: flex;
+  justify-content: center;
+  padding: 20px 20px 0 20px;
+  /* Reduce bottom padding to 0 */
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.app-container {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  padding: 20px 20px 0 20px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 900px;
+  min-height: 650px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 1.8em;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#searchInput {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+/* Note input area */
+.note-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.note-input textarea {
+  height: 100px;
+}
+
+.note-input input,
+.note-input textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+.note-input textarea {
+  resize: vertical;
+}
+
+.note-input button {
+  background: #6c63ff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.note-input button:hover {
+  background: #574b90;
+  transform: scale(1.02);
+}
+
+.note-input input::placeholder,
+.note-input textarea::placeholder {
+  color: #555;
+  opacity: 1;
+}
+
+/* Notes container: vertical and scrollable */
+.notes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 725px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.notes-container::-webkit-scrollbar {
+  width: 8px;
+  background: #eee;
+}
+
+.notes-container::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 4px;
+}
+
+/* Note card */
+.note {
+  position: relative;
+  min-height: 150px;
+  max-height: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 15px 10px 50px 15px;
+  /* extra bottom for actions */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: fadeInScale 0.4s ease;
+}
+
+/* Note title styles */
+.note h3 {
+  margin-bottom: 8px;
+  font-size: 1.05em;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+/* Note content - scrollable! */
+.note p {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  max-height: 75px;
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+
+/* Checklist: make checklist scrollable if it gets long */
+.checklist {
+  flex: 1 1 auto;
+  max-height: 75px;
+  overflow-y: auto;
+  margin-bottom: 6px;
+}
+
+.checklist-item {
+  display: block;
+  font-size: 0.97em;
+  margin-bottom: 4px;
+}
+
+/* Add scrollbar for note content/checklist */
+.note p::-webkit-scrollbar,
+.checklist::-webkit-scrollbar {
+  width: 4px;
+  background: #eee;
+}
+
+.note p::-webkit-scrollbar-thumb,
+.checklist::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 2px;
+}
+
+/* Pin badge */
+.pin-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: gold;
+  color: black;
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: 0.75em;
+}
+
+.note-actions {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 1;
+}
+
+.note-actions button {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+  font-weight: 500;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.3s ease;
+}
+
+.note-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.18);
+}
+
+.note-actions button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.note-actions .edit-btn {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+}
+
+.note-actions .edit-btn:hover {
+  background: linear-gradient(135deg, #42a5f5, #1976D2);
+}
+
+.note-actions .delete-btn {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+}
+
+.note-actions .delete-btn:hover {
+  background: linear-gradient(135deg, #ef5350, #d32f2f);
+}
+
+/* Empty state message styles for notes */
+.empty-state {
+  padding: 40px 0;
+  text-align: center;
+  color: #888;
+  font-size: 1.15em;
+}
+
+/* Animations */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Dark mode styles */
+body.dark {
+  background: linear-gradient(135deg, #2C312A, #75767b);
+  color: #f0f0f0;
+}
+
+body.dark .app-container {
+  background: rgba(44, 49, 42, 0.95);
+}
+
+body.dark .note-input input,
+body.dark .note-input textarea,
+body.dark #searchInput {
+  background: #75767b;
+  color: #f0f0f0;
+  border: 1px solid #aaa;
+}
+
+body.dark #searchInput::placeholder,
+body.dark .note-input input::placeholder,
+body.dark .note-input textarea::placeholder {
+  color: #ddd;
+  opacity: 1;
+}
+
+body.dark .note {
+  background: #2f3136;
+  color: #333;
+}
+
+body.dark .note-actions button {
+  background: linear-gradient(135deg, #555, #444);
+  color: #f0f0f0;
+}
+
+body.dark .note-actions .edit-btn {
+  background: linear-gradient(135deg, #64b5f6, #1e88e5);
+}
+
+body.dark .note-actions .delete-btn {
+  background: linear-gradient(135deg, #e57373, #d32f2f);
+}
+
+body.dark .notes-container {
+  background: rgba(44, 49, 42, 0.95);
+}
+
+body.dark .note p::-webkit-scrollbar,
+body.dark .checklist::-webkit-scrollbar {
+  background: #444;
+}
+
+body.dark .note p::-webkit-scrollbar-thumb,
+body.dark .checklist::-webkit-scrollbar-thumb {
+  background: #666;
+}
